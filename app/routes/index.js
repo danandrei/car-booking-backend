@@ -2,12 +2,14 @@ const express = require('express');
 const passport = require('passport');
 const logger = require('winston');
 const { ServerError } = require('../helpers/server_error');
+const { checkUserRole } = require('../middleware/auth');
 const controllers = require('../controllers');
 
 const router = express.Router();
 const {
   auth,
   users,
+  cars,
 } = controllers;
 
 /**
@@ -51,6 +53,35 @@ apiRouter.post('/users',
 apiRouter.get('/users/me',
   passport.authenticate('jwt', { session: false }),
   controllerHandler(users.getOne, (req, res, next) => [req.user._id])
+);
+
+/**
+ * Cars.
+ */
+apiRouter.post('/cars',
+  passport.authenticate('jwt', { session: false }),
+  checkUserRole('admin'),
+  controllerHandler(cars.createOne, (req, res, next) => [req.body])
+);
+apiRouter.get('/cars',
+  passport.authenticate('jwt', { session: false }),
+  checkUserRole(['admin', 'customer']),
+  controllerHandler(cars.getAll, (req, res, next) => [req.query])
+);
+apiRouter.get('/cars/:id',
+  passport.authenticate('jwt', { session: false }),
+  checkUserRole(['admin', 'customer']),
+  controllerHandler(cars.getOne, (req, res, next) => [req.params.id])
+);
+apiRouter.put('/cars/:id',
+  passport.authenticate('jwt', { session: false }),
+  checkUserRole('admin'),
+  controllerHandler(cars.updateOne, (req, res, next) => [req.params.id, req.body])
+);
+apiRouter.delete('/cars/:id',
+  passport.authenticate('jwt', { session: false }),
+  checkUserRole('admin'),
+  controllerHandler(cars.removeOne, (req, res, next) => [req.params.id])
 );
 
 
