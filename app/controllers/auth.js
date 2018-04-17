@@ -27,11 +27,12 @@ function signin(req, res, next) {
 
       // generate token
       const secret = JWT_SECRET;
+      const role = user.role;
       const token = jwt.sign({
         userId: user._id
       }, secret, { expiresIn: '30 days' });
 
-      return resolve({ token })
+      return resolve({ token, role })
     })(req, res, next);
   });
 }

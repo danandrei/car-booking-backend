@@ -19,9 +19,16 @@ async function create (carData) {
   }
 }
 
-function find (filter = {}) {
+function find (options = {}) {
+
+  const query = {};
+  const skip = parseInt(options.skip) || 0;
+  const limit = parseInt(options.limit) || 50;
+
   return Car
-  .find(filter)
+  .find(query)
+  .skip(skip)
+  .limit(limit)
   .exec();
 }
 

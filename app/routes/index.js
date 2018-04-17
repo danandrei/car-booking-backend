@@ -10,6 +10,7 @@ const {
   auth,
   users,
   cars,
+  bookings,
 } = controllers;
 
 /**
@@ -82,6 +83,25 @@ apiRouter.delete('/cars/:id',
   passport.authenticate('jwt', { session: false }),
   checkUserRole('admin'),
   controllerHandler(cars.removeOne, (req, res, next) => [req.params.id])
+);
+
+/**
+ * bookings.
+ */
+apiRouter.post('/cars/:id/book',
+  passport.authenticate('jwt', { session: false }),
+  checkUserRole(['admin', 'customer']),
+  controllerHandler(bookings.createOne, (req, res, next) => [req.user._id, req.params.id, req.body])
+);
+apiRouter.get('/bookings',
+  passport.authenticate('jwt', { session: false }),
+  checkUserRole(['admin', 'customer']),
+  controllerHandler(bookings.getAll, (req, res, next) => [req.query])
+);
+apiRouter.delete('/bookings/:id',
+  passport.authenticate('jwt', { session: false }),
+  checkUserRole(['admin', 'customer']),
+  controllerHandler(bookings.removeOne, (req, res, next) => [req.params.id])
 );
 
 
