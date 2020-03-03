@@ -15,7 +15,7 @@ async function getOne(userId) {
 }
 
 async function createOne(data) {
-  checkParams(['firstName', 'lastName', 'email', 'password', 'role'], data)
+  checkParams(['firstName', 'lastName', 'email', 'password'], data)
 
   const role = data.role || 'customer'
 
