@@ -57,7 +57,10 @@ module.exports = callback => {
   app.use(routes)
 
   server.listen(process.env.PORT || config.get('NODE_PORT'), () =>
-    logger.info('[SERVER] Listening on port ' + config.get('NODE_PORT')),
+    logger.info(
+      '[SERVER] Listening on port ' + process.env.PORT ||
+        config.get('NODE_PORT'),
+    ),
   )
 
   if (callback) {
