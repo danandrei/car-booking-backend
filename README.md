@@ -17,7 +17,7 @@ POST /users
 BODY:  
 {"firstName":"FirstName","lastName":"LastName","email":"email@gmail.com","password":"1234"}  
 
-#get current user (admin/customer only) 
+## get current user (admin/customer only) 
 GET /users/me  
 
 ## create car (admin only)
@@ -44,13 +44,15 @@ RESPONSE:
 
 DELETE /cars/:id
 
-#book car (customer only)
+## book car (customer only)
 POST /cars/:id/book  
-BODY {"startDate":"2020-03-17T12:05:45.041Z","endDate":"2020-03-18T12:05:47.574Z"}  
+BODY  
+{"startDate":"2020-03-17T12:05:45.041Z","endDate":"2020-03-18T12:05:47.574Z"}  
 
-#get car booking (admin only)
+## get car booking (admin only)
 GET /bookings?car={car.\_id}  
-RESPONSE: {"status":200,"data":[{"_id":"5e5e449cf4ad0400179ece7a","updatedAt":"2020-03-03T11:50:52.930Z","createdAt":"2020-03-03T11:50:52.930Z","user":{"_id":"5e5e439ff4ad0400179ece78","updatedAt":"2020-03-03T11:46:39.216Z","createdAt":"2020-03-03T11:46:39.216Z","firstName":"Andrei","lastName":"Dan","email":"andreidani96@gmail.com","password":"$2b$10$UA/WVpagZ9bWfZ5FJHCTGeqSuusQn0IT4cqLzYqqm2rcdS1g4kv/6","role":"customer","__v":0},"car":"5e5e4476f4ad0400179ece79","startDate":"2020-03-04T11:50:50.168Z","endDate":"2020-03-13T11:50:51.864Z","__v":0}]}  
+RESPONSE:  
+{"status":200,"data":[{"_id":"5e5e449cf4ad0400179ece7a","updatedAt":"2020-03-03T11:50:52.930Z","createdAt":"2020-03-03T11:50:52.930Z","user":{"_id":"5e5e439ff4ad0400179ece78","updatedAt":"2020-03-03T11:46:39.216Z","createdAt":"2020-03-03T11:46:39.216Z","firstName":"Andrei","lastName":"Dan","email":"andreidani96@gmail.com","password":"$2b$10$UA/WVpagZ9bWfZ5FJHCTGeqSuusQn0IT4cqLzYqqm2rcdS1g4kv/6","role":"customer","__v":0},"car":"5e5e4476f4ad0400179ece79","startDate":"2020-03-04T11:50:50.168Z","endDate":"2020-03-13T11:50:51.864Z","__v":0}]}  
 
-Error messages will look like this. 
+**Error messages will look like this.**  
 {"status":400,"message":"This car is already booked on the selected dates."}
