@@ -36,7 +36,7 @@ BODY
    
 RESPONSE:  
 ``` JSON
-{"status":200,"data":{"\_\_v":0,"updatedAt":"2020-03-03T12:01:51.920Z","createdAt":"2020-03-03T12:01:51.920Z","make":"car 2","model":"car 2","year":2001,"description":"test","\_id":"5e5e472ff4ad0400179ece7c"}}
+{"status":200,"data":{"_v":0,"updatedAt":"2020-03-03T12:01:51.920Z","createdAt":"2020-03-03T12:01:51.920Z","make":"car 2","model":"car 2","year":2001,"description":"test","_id":"5e5e472ff4ad0400179ece7c"}}
 ```
 
 ## get all cars (admin/customer only)
@@ -74,4 +74,6 @@ RESPONSE:
 ``` 
 
 **Error messages will look like this.**  
+``` JSON
 {"status":400,"message":"This car is already booked on the selected dates."}
+```
